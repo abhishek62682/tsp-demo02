@@ -1,0 +1,891 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Timeless Saatphere | Roshan - Wedding Photography & Films</title>
+    <meta name="description"
+        content="Timeless Saatphere by Roshan. Timeless love, cinematic stories, forever frames. Wedding photography and films. DM on Instagram for bookings." />
+    <link rel="preconnect" href="https://fonts.googleapis.com/" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&amp;family=Work+Sans:wght@400&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollToPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.js"></script>
+    <style type="text/tailwindcss">
+        @font-face {
+        font-family: Soligant_Font;
+        src: url(font/Soligant.ttf);
+      }
+      .font-primary {
+        font-family: Soligant_Font;
+      }
+      @theme {
+        --color-clifford: #da373d;
+        --font-secondary: "Inter", sans-serif;
+        --shadow-c: 0 2px 8px 2px #00000014;
+      }
+
+      /* ===== LENIS ===== */
+      html.lenis,
+      html.lenis body {
+        height: auto;
+      }
+      .lenis.lenis-smooth {
+        scroll-behavior: auto !important;
+      }
+      .lenis.lenis-smooth [data-lenis-prevent] {
+        overscroll-behavior: contain;
+      }
+      .lenis.lenis-stopped {
+        overflow: hidden;
+      }
+      .lenis.lenis-smooth iframe {
+        pointer-events: none;
+      }
+
+      body {
+        font-family: var(--font-secondary);
+        padding-top: 72px;
+      }
+
+      .max-w-container {
+        width: 100%;
+        max-width: 1300px;
+        margin: auto;
+        padding: 60px 24px;
+      }
+      @media (min-width: 768px) {
+        .max-w-container {
+          padding: 140px 24px;
+        }
+      }
+
+      .noise-grain {
+        position: relative;
+        isolation: isolate;
+        background-color: #fffcf7;
+        overflow: hidden;
+      }
+      .noise-grain:after {
+        position: absolute;
+        top: -100%;
+        left: -100%;
+        width: 300%;
+        height: 300%;
+        z-index: 1;
+        content: "";
+        pointer-events: none;
+        opacity: 0.2;
+        mix-blend-mode: multiply;
+        background-image: url(https://www.ivoryfilms.in/figma/dissolve-noise.png);
+        background-size: 256px 256px;
+      }
+
+      /* ===== TESTIMONIAL CARDS ===== */
+      .tcard {
+        width: 100%;
+        height: 100%;
+      }
+      @media (min-width: 640px) and (max-width: 1023px) {
+        .tcard {
+          width: calc(50% - 12px);
+        }
+      }
+      @media (min-width: 1024px) {
+        .tcard {
+          width: auto;
+          flex: var(--f) 1 0%;
+        }
+      }
+
+      /* ===== FILMS SWIPER ===== */
+      .cine-swiper .swiper-wrapper {
+        align-items: center;
+      }
+      .cine-swiper .swiper-slide {
+        position: relative;
+        display: block;
+        width: 50vw;
+        height: 500px;
+      }
+      .cine-swiper .swiper-slide-active {
+        z-index: 2;
+      }
+      .cine-swiper .swiper-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .cine-swiper .play {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 70px;
+        height: 70px;
+        transform: translate(-50%, -50%);
+        border: 1.5px solid #fff;
+        border-radius: 9999px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+      .cine-swiper .swiper-slide-active .play {
+        opacity: 1;
+      }
+      @media (max-width: 768px) {
+        .cine-swiper .swiper-slide {
+          width: 88vw;
+          height: 340px;
+          clip-path: none !important;
+        }
+      }
+
+      /* ===== TESTIMONIAL SWIPER ===== */
+      .testimonial-swiper .swiper-wrapper {
+        align-items: stretch;
+      }
+      .testimonial-swiper .swiper-slide {
+        height: auto;
+        display: flex;
+      }
+
+      /* ===== NAVBAR ===== */
+      #site-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 50;
+        background: rgba(255, 252, 247, 0.92);
+        backdrop-filter: blur(6px);
+        border-bottom: 1px solid #e3ddcb;
+        transition: transform 0.6s cubic-bezier(0.76, 0, 0.24, 1);
+        will-change: transform;
+      }
+      #site-nav.nav-hidden {
+        transform: translateY(-101%);
+      }
+      #site-nav .nav-links {
+        display: flex;
+        gap: 32px;
+      }
+      #site-nav .nav-toggle {
+        display: none;
+      }
+      @media (max-width: 767px) {
+        #site-nav .nav-links {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          width: 100%;
+          background: #fffcf7;
+          flex-direction: column;
+          gap: 0;
+          border-bottom: 1px solid #e3ddcb;
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 0.3s ease;
+        }
+        #site-nav .nav-links a {
+          padding: 14px 24px;
+          border-top: 1px solid #ece6d5;
+        }
+        #site-nav.open .nav-links {
+          max-height: 400px;
+        }
+        #site-nav .nav-toggle {
+          display: flex;
+        }
+      }
+    </style>
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <nav id="site-nav">
+        <div class="max-w-[1300px] mx-auto px-6 h-[72px] flex items-center justify-between">
+            <a href="#home" class="font-primary uppercase text-[22px] text-[#4a452f] tracking-[2px]"><img  class="w-[120px] " src="./tsp-logo.png" alt="Timeless Saatphere"></a>
+            <div class="nav-links uppercase text-[14px] tracking-[1px] text-[#4a452f] items-center">
+                <a href="#about" class="hover:text-[#766f52] transition-colors">About</a>
+                <a href="#films" class="hover:text-[#766f52] transition-colors">Films</a>
+                <a href="#photography" class="hover:text-[#766f52] transition-colors">Photography</a>
+                <a href="#packages" class="hover:text-[#766f52] transition-colors">Packages</a>
+                <a href="#testimonials" class="hover:text-[#766f52] transition-colors">Testimonials</a>
+                <a href="#contact" class="hover:text-[#766f52] transition-colors">Contact</a>
+            </div>
+            <button class="nav-toggle flex flex-col gap-[5px] w-[28px]" aria-label="Toggle menu" aria-expanded="false"
+                onclick="document.getElementById('site-nav').classList.toggle('open'); this.setAttribute('aria-expanded', document.getElementById('site-nav').classList.contains('open'))">
+                <span class="block h-[2px] w-full bg-[#4a452f]"></span>
+                <span class="block h-[2px] w-full bg-[#4a452f]"></span>
+                <span class="block h-[2px] w-full bg-[#4a452f]"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section id="home" class="relative">
+        <div class="noise-grain overflow-hidden">
+            <div class="relative z-10 flex flex-col md:flex-row md:items-stretch md:h-screen">
+                <div class="flex-1 flex flex-col items-center justify-center text-center px-6 py-16 md:px-8 md:py-20">
+                    <h2
+                        class="font-primary uppercase text-[32px] sm:text-[40px] md:text-[48px] leading-[1.15] text-[#4a452f] max-w-[620px]">
+                        Redefining the way weddings are photographed, filmed, and felt,
+                        forever.
+                    </h2>
+                    <p
+                        class="mt-8 md:mt-16 text-[14px] md:text-[15px] leading-[22px] uppercase text-[#a8a28a] max-w-[560px]">
+                        Timeless love. Cinematic stories. Forever frames. Every frame is a
+                        story. Every story, a legacy. Felt, not just seen.
+                    </p>
+                </div>
+
+                <div class="w-full md:w-[41%] h-[360px] sm:h-[460px] md:h-auto shrink-0">
+                    <img class="w-full h-full object-cover"
+                        src="https://framerusercontent.com/images/fvTmT0GSecvhv6irb5aX8atwxtM.jpg?width=520&height=682"
+                        alt="Wedding ritual" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT US -->
+    <section id="about" class="relative">
+        <div class="noise-grain overflow-hidden">
+            <div class="relative z-10 mx-auto max-w-[1100px] px-6 pt-[80px] md:pt-[120px]">
+                <div class="mx-auto max-w-[1000px]">
+                    <img src="https://www.theweddingcompany.com/Top-decoration.svg" alt="" aria-hidden="true"
+                        class="block h-auto w-full select-none" />
+
+                    <div class="flow-root -mt-px border-x border-b border-[#e9dcb8] bg-[#fffdf7] px-6 pb-14 md:pb-20">
+                        <div class="relative z-10 mt-8 md:-mt-[120px]">
+                            <div class="text-center">
+                                <span
+                                    class="font-primary text-[32px] uppercase leading-none tracking-[4px] text-[#766f52] md:text-[40px]">TS</span>
+                                <p
+                                    class="mt-3 text-[12px] uppercase tracking-[2px] text-[#8a8468] md:text-[14px] md:tracking-[3px]">
+                                    Timeless love • Cinematic stories • Forever frames
+                                </p>
+                            </div>
+
+                            <div class="mt-10 flex flex-col items-center justify-center gap-5 md:flex-row md:gap-10">
+                                <div
+                                    class="flex h-[170px] w-[170px] flex-col items-center justify-center rounded-full border border-[#e9dcb8] bg-white text-center md:h-[220px] md:w-[220px]">
+                                    <span
+                                        class="font-secondary text-[34px] font-normal leading-none text-[#766f52] md:text-[40px]">132+</span>
+                                    <span
+                                        class="mt-2 text-[14px] leading-[18px] text-[#4a452f] md:text-[15px] md:leading-[20px]">stories<br />shared</span>
+                                </div>
+                                <div
+                                    class="flex h-[170px] w-[170px] flex-col items-center justify-center rounded-full border border-[#e9dcb8] bg-white text-center md:h-[220px] md:w-[220px]">
+                                    <span
+                                        class="font-secondary text-[34px] font-normal leading-none text-[#766f52] md:text-[40px]">2K+</span>
+                                    <span
+                                        class="mt-2 text-[14px] leading-[18px] text-[#4a452f] md:text-[15px] md:leading-[20px]">Instagram<br />family</span>
+                                </div>
+                                <div
+                                    class="flex h-[170px] w-[170px] flex-col items-center justify-center rounded-full border border-[#e9dcb8] bg-white text-center md:h-[220px] md:w-[220px]">
+                                    <span
+                                        class="font-secondary text-[34px] font-normal leading-none text-[#766f52] md:text-[40px]">∞</span>
+                                    <span
+                                        class="mt-2 text-[14px] leading-[18px] text-[#4a452f] md:text-[15px] md:leading-[20px]">forever<br />frames</span>
+                                </div>
+                            </div>
+
+                            <p
+                                class="mx-auto mt-10 max-w-[620px] text-center text-[13px] uppercase leading-[22px] text-[#8a8468] md:mt-12 md:text-[15px] md:leading-[24px]">
+                                Led by Roshan, Timeless Saatphere tells wedding
+                                stories with honest, cinematic frames. Every couple, every
+                                ritual, every emotion, preserved the way it felt.
+                            </p>
+
+                            <div class="mt-8 text-center md:mt-10">
+                                <a href="#contact"
+                                    class="inline-block bg-[#766f52] px-10 py-4 text-[12px] uppercase tracking-[0.6px] text-white transition-colors duration-300 hover:bg-[#5e5842]"
+                                    style="font-family: &quot;Work Sans&quot;, sans-serif">Book Your Shoot</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="h-[80px] md:h-[120px]"></div>
+        </div>
+    </section>
+
+    <!-- VIDEO BREAK -->
+    <section class="relative h-[70svh] w-full overflow-hidden bg-black md:h-[100vh]">
+        <video class="absolute inset-0 h-full w-full object-cover"
+            src="https://assets.eventgraphia.com/site_media/homepage_assets/background_videos/2026/portrait/b.mp4"
+            autoplay muted loop playsinline preload="metadata"></video>
+        <div class="absolute inset-0 bg-black/20"></div>
+    </section>
+
+    <!-- FILMS -->
+    <section id="films" class="relative">
+        <div class="noise-grain overflow-hidden py-[120px]">
+            <div class="relative z-10 text-center mb-[60px] md:mb-[90px] px-6">
+                <h2 class="font-primary uppercase text-[40px] md:text-[64px] leading-none text-[#766f52]">
+                    Films
+                </h2>
+                <p class="mt-8 text-[15px] uppercase text-[#a8a28a]">
+                    Films that feel — every frame, a living memory.
+                </p>
+                <a href="https://www.instagram.com/timeless_saatphere/" target="_blank" rel="noopener noreferrer"
+                    class="inline-block border border-[#766f52] px-10 py-4 text-[12px] font-normal mt-10 uppercase tracking-[0.6px] text-[#766f52] font-[family-name:Work_Sans] transition-colors duration-300 hover:bg-[#766f52] hover:text-white">
+                    View All
+                </a>
+            </div>
+
+            <div class="swiper cine-swiper relative z-10">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="https://static.wixstatic.com/media/c33238_4300589d6f4f4a129ec635c64aec9b0c~mv2.jpg/v1/fill/w_1600,h_900,fp_0.45_0.30,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/vrt-img-web81.jpg"
+                            alt="Wedding film" loading="lazy" />
+                        <span class="play"><svg viewBox="0 0 24 24" width="30" height="30" fill="#fff">
+                                <path d="M8 5v14l11-7z" />
+                            </svg></span>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://static.wixstatic.com/media/c33238_2773d851203d4b71b05c997ac2f565bb~mv2.jpg/v1/fill/w_1600,h_900,fp_0.55_0.34,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/vrt-img-web133.jpg"
+                            alt="Wedding film" loading="lazy" />
+                        <span class="play"><svg viewBox="0 0 24 24" width="30" height="30" fill="#fff">
+                                <path d="M8 5v14l11-7z" />
+                            </svg></span>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://static.wixstatic.com/media/c33238_4c22a4deca1d4f2c8a3ff99036664be4~mv2.webp/v1/fill/w_1600,h_900,fp_0.57_0.22,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/PKP_3130.webp"
+                            alt="Wedding film" loading="lazy" />
+                        <span class="play"><svg viewBox="0 0 24 24" width="30" height="30" fill="#fff">
+                                <path d="M8 5v14l11-7z" />
+                            </svg></span>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://static.wixstatic.com/media/c33238_b6f4e0476f3f4eff8078f497bc9ef80f~mv2.jpg/v1/fill/w_1600,h_900,fp_0.53_0.68,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/DSCF1202.jpg"
+                            alt="Wedding film" loading="lazy" />
+                        <span class="play"><svg viewBox="0 0 24 24" width="30" height="30" fill="#fff">
+                                <path d="M8 5v14l11-7z" />
+                            </svg></span>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://static.wixstatic.com/media/c33238_092297fbeb264384be75aab207c7ccea~mv2.jpg/v1/fill/w_1600,h_900,fp_0.38_0.54,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/RSP03499.jpg"
+                            alt="Wedding film" loading="lazy" />
+                        <span class="play"><svg viewBox="0 0 24 24" width="30" height="30" fill="#fff">
+                                <path d="M8 5v14l11-7z" />
+                            </svg></span>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://static.wixstatic.com/media/c33238_8f3cdbfd96d14c85a152b63bdb3493c4~mv2.jpg/v1/fill/w_1600,h_900,fp_0.50_0.50,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/vrt-img-web36.jpg"
+                            alt="Wedding film" loading="lazy" />
+                        <span class="play"><svg viewBox="0 0 24 24" width="30" height="30" fill="#fff">
+                                <path d="M8 5v14l11-7z" />
+                            </svg></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PHOTOGRAPHY -->
+    <section id="photography" class="relative">
+        <div class="noise-grain overflow-hidden pt-0 pb-[60px] md:py-[120px]">
+            <div class="relative z-10 text-center mb-[60px] md:mb-[90px] px-6">
+                <h2 class="font-primary uppercase text-[40px] md:text-[64px] leading-none text-[#766f52]">
+                    Photography
+                </h2>
+                <p class="mt-8 text-[15px] uppercase text-[#a8a28a]">
+                    The art of stillness — every frame felt, every story timeless
+                </p>
+                <a href="https://www.instagram.com/timeless_saatphere/" target="_blank" rel="noopener noreferrer"
+                    class="inline-block border border-[#766f52] px-10 py-4 text-[12px] font-normal mt-10 uppercase tracking-[0.6px] text-[#766f52] font-[family-name:Work_Sans] transition-colors duration-300 hover:bg-[#766f52] hover:text-white">
+                    View All
+                </a>
+            </div>
+
+            <div class="swiper cine-swiper photo-swiper relative z-10">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="https://cdn.sanity.io/images/isp6fu2u/production/492c48f41efea423bc63513002d178068b9c24ee-5867x3911.jpg?auto=format&w=1600&q=80"
+                            alt="Wedding photography" loading="lazy" />
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://cdn.sanity.io/images/isp6fu2u/production/f957f4c4d688d38a148ce51a2671bcd13879917a-11814x7876.jpg?auto=format&w=1600&q=80"
+                            alt="Wedding photography" loading="lazy" />
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://cdn.sanity.io/images/isp6fu2u/production/4e27468a97d398f5945c91e1ef295835402d017f-6852x4568.jpg?auto=format&w=1600&q=80"
+                            alt="Wedding photography" loading="lazy" />
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://cdn.sanity.io/images/isp6fu2u/production/d2d50330bb43bc9b20b995e8adec7c8b71a573b6-5977x3985.jpg?auto=format&w=1600&q=80"
+                            alt="Wedding photography" loading="lazy" />
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://cdn.sanity.io/images/isp6fu2u/production/98912beb98697b9f31e260afc047b5a1da6dcc83-1280x720.png?auto=format&w=1600&q=80"
+                            alt="Wedding photography" loading="lazy" />
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://cdn.sanity.io/images/isp6fu2u/production/5302e8c40689e5977928544cbc591da46459c43a-5039x6299.jpg?auto=format&w=1600&q=80"
+                            alt="Wedding photography" loading="lazy" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials" class="relative">
+        <div class="noise-grain overflow-hidden">
+            <div class="relative z-10 max-w-[1300px] mx-auto px-6 py-[100px] md:py-[120px]">
+                <div class="text-center mb-[60px] md:mb-[90px]">
+                    <h2 class="font-primary uppercase text-[40px] md:text-[64px] leading-none text-[#766f52]">
+                        Words from families
+                    </h2>
+                    <p class="mt-8 text-[15px] uppercase text-[#a8a28a]">
+                        Kind words from the couples and families we have worked with
+                    </p>
+                </div>
+
+                <div class="swiper testimonial-swiper">
+                    <div class="swiper-wrapper items-stretch">
+                        <div class="swiper-slide tcard flex h-auto flex-col overflow-hidden border border-[#d3cdbd]"
+                            style="--f: 0.601">
+                            <img class="h-auto w-full"
+                                src="https://cdn.sanity.io/images/isp6fu2u/production/97a6667c79d392dd2f1208bbc01464c7974f9c31-1290x2147.webp"
+                                alt="Client testimonial 1" loading="lazy" />
+                            <p
+                                class="mt-auto border-t border-[#d3cdbd] px-6 py-5 text-[16px] text-[#766f52] md:px-8 md:py-6 md:text-[18px]">
+                                Aarav &amp; Meera — Udaipur
+                            </p>
+                        </div>
+                        <div class="swiper-slide tcard flex h-auto flex-col overflow-hidden border border-[#d3cdbd]"
+                            style="--f: 0.575">
+                            <img class="h-auto w-full"
+                                src="https://cdn.sanity.io/images/isp6fu2u/production/f157bf3d5bfba2c05960abbcead27947f257da40-1290x2244.webp"
+                                alt="Client testimonial 2" loading="lazy" />
+                            <p
+                                class="mt-auto border-t border-[#d3cdbd] px-6 py-5 text-[16px] text-[#766f52] md:px-8 md:py-6 md:text-[18px]">
+                                Rohan &amp; Ishita — Jaipur
+                            </p>
+                        </div>
+                        <div class="swiper-slide tcard flex h-auto flex-col overflow-hidden border border-[#d3cdbd]"
+                            style="--f: 0.685">
+                            <img class="h-auto w-full"
+                                src="https://cdn.sanity.io/images/isp6fu2u/production/6d79bea68ae3e5b217e34daf384d06084ae4a674-1290x1884.webp"
+                                alt="Client testimonial 3" loading="lazy" />
+                            <p
+                                class="mt-auto border-t border-[#d3cdbd] px-6 py-5 text-[16px] text-[#766f52] md:px-8 md:py-6 md:text-[18px]">
+                                Kabir &amp; Ananya — Goa
+                            </p>
+                        </div>
+                        <div class="swiper-slide tcard flex h-auto flex-col overflow-hidden border border-[#d3cdbd]"
+                            style="--f: 0.73">
+                            <img class="h-auto w-full"
+                                src="https://cdn.sanity.io/images/isp6fu2u/production/e1308a1e71f6ce1d6ff638cf55dff7b9a1cf57f7-1290x1768.webp"
+                                alt="Client testimonial 4" loading="lazy" />
+                            <p
+                                class="mt-auto border-t border-[#d3cdbd] px-6 py-5 text-[16px] text-[#766f52] md:px-8 md:py-6 md:text-[18px]">
+                                Vihaan &amp; Riya — Mumbai
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="swiper-pagination
+                        static! mt-7 flex w-full items-center justify-center gap-2 lg:hidden
+                        [--swiper-pagination-bullet-size:8px]
+                        [--swiper-pagination-color:#766f52]
+                        [--swiper-pagination-bullet-inactive-color:#766f52]
+                        [--swiper-pagination-bullet-inactive-opacity:0.35]
+                        [&_.swiper-pagination-bullet]:m-0!
+                        [&_.swiper-pagination-bullet]:rounded-full
+                        [&_.swiper-pagination-bullet]:transition-all
+                        [&_.swiper-pagination-bullet-active]:w-[22px]!">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PACKAGES -->
+    <section id="packages" class="relative">
+        <div class="noise-grain overflow-hidden">
+            <div class="relative z-10 max-w-[1300px] mx-auto px-6 py-[100px] md:py-[120px]">
+                <div class="text-center mb-[60px] md:mb-[90px]">
+                    <h2 class="font-primary uppercase text-[40px] md:text-[64px] leading-none text-[#766f52]">
+                        Choose your story
+                    </h2>
+                    <p class="mt-8 text-[15px] uppercase text-[#a8a28a]">
+                        Every wedding is different. Every package is tailored.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch max-w-[1100px] mx-auto">
+                    <div class="border border-[#d3cdbd] p-3">
+                        <div class="h-full text-[#4a452f] border border-[#d3cdbd] px-8 py-12 flex flex-col text-center">
+                            <p class="uppercase tracking-[3px] text-[13px] text-[#8a8468]">Stills</p>
+                            <h3 class="mt-4 font-primary uppercase text-[34px] leading-[36px]">Photography</h3>
+                            <p class="mt-6 text-[15px] text-[#8a8468]">DM for pricing</p>
+                            <ul class="mt-8 mb-10 text-[15px] leading-[22px] flex-1">
+                                <li class="py-3 border-t border-[#d3cdbd]">1 lead photographer</li>
+                                <li class="py-3 border-t border-[#d3cdbd]">1 day coverage</li>
+                                <li class="py-3 border-t border-[#d3cdbd]">Edited gallery, 300+ photos</li>
+                                <li class="py-3 border-t border-[#d3cdbd]">Online delivery</li>
+                            </ul>
+                            <a href="#contact"
+                                class="inline-block self-center uppercase text-[12px] tracking-[0.6px] px-10 py-4 transition-colors duration-300 bg-[#766f52] text-white hover:bg-[#5e5842]"
+                                style="font-family: &quot;Work Sans&quot;, sans-serif">Enquire Now</a>
+                        </div>
+                    </div>
+                    <div class="border border-[#d3cdbd] p-3">
+                        <div class="h-full bg-[#766f52] text-white px-8 py-12 flex flex-col text-center">
+                            <p class="uppercase tracking-[3px] text-[13px] text-white/70">Photography + Films</p>
+                            <h3 class="mt-4 font-primary uppercase text-[34px] leading-[36px]">Signature</h3>
+                            <p class="mt-6 text-[15px] text-white/70">DM for pricing</p>
+                            <ul class="mt-8 mb-10 text-[15px] leading-[22px] flex-1">
+                                <li class="py-3 border-t border-white/25">Photo and film team</li>
+                                <li class="py-3 border-t border-white/25">Up to 2 days coverage</li>
+                                <li class="py-3 border-t border-white/25">Cinematic highlight film</li>
+                                <li class="py-3 border-t border-white/25">Same day edit</li>
+                                <li class="py-3 border-t border-white/25">Premium album</li>
+                            </ul>
+                            <a href="#contact"
+                                class="inline-block self-center uppercase text-[12px] tracking-[0.6px] px-10 py-4 transition-colors duration-300 bg-white text-[#4a452f] hover:bg-[#f1ede2]"
+                                style="font-family: &quot;Work Sans&quot;, sans-serif">Enquire Now</a>
+                        </div>
+                    </div>
+                    <div class="border border-[#d3cdbd] p-3">
+                        <div class="h-full text-[#4a452f] border border-[#d3cdbd] px-8 py-12 flex flex-col text-center">
+                            <p class="uppercase tracking-[3px] text-[13px] text-[#8a8468]">Cinematic</p>
+                            <h3 class="mt-4 font-primary uppercase text-[34px] leading-[36px]">Films</h3>
+                            <p class="mt-6 text-[15px] text-[#8a8468]">DM for pricing</p>
+                            <ul class="mt-8 mb-10 text-[15px] leading-[22px] flex-1">
+                                <li class="py-3 border-t border-[#d3cdbd]">Lead cinematographer</li>
+                                <li class="py-3 border-t border-[#d3cdbd]">1 day coverage</li>
+                                <li class="py-3 border-t border-[#d3cdbd]">Highlight film, 3 to 5 min</li>
+                                <li class="py-3 border-t border-[#d3cdbd]">Full ceremony film</li>
+                            </ul>
+                            <a href="#contact"
+                                class="inline-block self-center uppercase text-[12px] tracking-[0.6px] px-10 py-4 transition-colors duration-300 bg-[#766f52] text-white hover:bg-[#5e5842]"
+                                style="font-family: &quot;Work Sans&quot;, sans-serif">Enquire Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT / BOOK YOUR SHOOT -->
+    <section id="contact">
+        <div class="w-full">
+            <div class="max-w-container">
+                <div class="w-full flex flex-col lg:flex-row gap-10 justify-between items-center">
+
+                    <!-- LEFT IMAGES (visible on mobile too) -->
+                    <div
+                        class="w-full max-w-[600px] relative flex items-center justify-center overflow-hidden lg:overflow-visible py-4">
+                        <img class="w-[110px] sm:w-[170px] lg:w-[250px] left-0 lg:left-[-8%] absolute"
+                            src="https://framerusercontent.com/images/MPNOIW67RAPsVgPKq2P75FaoJOU.png?width=424&height=479"
+                            alt="" />
+                        <img class="w-[200px] sm:w-[280px] lg:w-[400px] relative z-10"
+                            src="https://framerusercontent.com/images/1abMP3Zhst48gM2g0n0chATDc.png?width=454&height=883"
+                            alt="" />
+                        <img class="w-[110px] sm:w-[170px] lg:w-[250px] right-0 lg:right-[-20%] absolute"
+                            src="https://framerusercontent.com/images/BeQunj0XOchjUx3k1XOVilFX3M.png?width=423&height=482"
+                            alt="" />
+                    </div>
+
+                    <!-- FORM -->
+                    <div class="shadow-c w-full mx-auto rounded-b-[270px] rounded-t-[270px] p-4 sm:p-6 max-w-[500px]">
+                        <div
+                            class="w-full pt-[40px] px-[20px] sm:pt-[60px] sm:px-[32px] pb-[56px] sm:pb-[76px] flex flex-col items-center justify-center rounded-b-[260px] rounded-t-[260px] h-full border border-[#dcdcdc]">
+                            <img class="w-[80px] sm:w-[100px]"
+                                src="https://framerusercontent.com/images/G2V4Pi3fmCAmuB1ucsPkL6raksU.svg?width=82&height=86"
+                                alt="" />
+
+                            <h4
+                                class="text-[32px] sm:text-[44px] pt-[25px] sm:pt-[35px] pb-[10px] uppercase normal font-primary leading-[1.1] text-center">
+                                Book Your Shoot
+                            </h4>
+                            <p
+                                class="text-[16px] sm:text-[18px] text-[#041117] text-center px-[8px] sm:px-[28px] pb-[32px] sm:pb-[40px] leading-[1.3]">
+                                Tell us about your big day and let's capture it together.
+                            </p>
+
+                            <div class="forms-wrapper space-y-7.5">
+                                <input class="w-full border-[#e6dcd0] text-[#595959] border px-5 h-[40px] text-[18px]"
+                                    placeholder="Full Name" type="text" />
+                                <input class="w-full border-[#e6dcd0] text-[#595959] border px-5 h-[40px] text-[18px]"
+                                    placeholder="Email" type="email" />
+                                <input class="w-full border-[#e6dcd0] text-[#595959] border px-5 h-[40px] text-[18px]"
+                                    placeholder="Phone Number" type="tel" />
+                                <input class="w-full border-[#e6dcd0] text-[#595959] border px-5 h-[40px] text-[18px]"
+                                    placeholder="Wedding Date" type="text" onfocus="this.type = 'date'"
+                                    onblur="if (!this.value) this.type = 'text';" />
+                                <input class="w-full border-[#e6dcd0] text-[#595959] border px-5 h-[40px] text-[18px]"
+                                    placeholder="Event Location" type="text" />
+                            </div>
+
+                            <a href="https://ig.me/m/timeless_saatphere" target="_blank" rel="noopener noreferrer"
+                                style="font-family: 'Work Sans', sans-serif; font-size: 12px; letter-spacing: 0.6px;"
+                                class="bg-[#766f52] text-white mt-10 font-normal uppercase px-10 py-4 hover:bg-[#5e5842] transition-colors duration-300 inline-block">
+                                DM to Book
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+<footer class="relative w-full bg-black overflow-hidden">
+    <img class="absolute top-6 right-4 w-[50px] sm:top-10 sm:right-6 sm:w-[80px]"
+        src="https://framerusercontent.com/images/uYi7uZ7VUYeuBLsEfpMj0ZojozY.svg?width=162&height=172" alt="" />
+
+    <img class="absolute left-4 bottom-2 w-[50px] sm:w-[80px]"
+        src="https://framerusercontent.com/images/uYi7uZ7VUYeuBLsEfpMj0ZojozY.svg?width=162&height=172" alt="" />
+
+    <div class="max-w-container !pb-[80px] !pt-[120px] md:!pb-[40px] md:!pt-[160px] relative z-10">
+        <div
+            class="w-full flex flex-col lg:flex-row flex-wrap items-center lg:items-start justify-center lg:justify-between gap-20 lg:gap-16 text-center lg:text-left">
+
+            <!-- Links -->
+            <div class="shrink-0">
+                <h4 class="font-primary text-white text-[36px] leading-[36px] mb-8">Links</h4>
+                <div class="flex gap-16 justify-center lg:justify-start">
+                    <div class="flex flex-col gap-5 text-white/90 text-[16px]">
+                        <a href="#about" class="hover:text-white/60 transition-colors">About</a>
+                        <a href="#films" class="hover:text-white/60 transition-colors">Films</a>
+                        <a href="#photography" class="hover:text-white/60 transition-colors">Photography</a>
+                    </div>
+                    <div class="flex flex-col gap-5 text-white/90 text-[16px]">
+                        <a href="#packages" class="hover:text-white/60 transition-colors">Packages</a>
+                        <a href="#testimonials" class="hover:text-white/60 transition-colors">Testimonials</a>
+                        <a href="#contact" class="hover:text-white/60 transition-colors">Contact</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Brand -->
+            <div class="flex flex-col items-center text-center max-w-[420px] mx-auto">
+                <div class="mb-6">
+                    <img class="w-[180px] invert mx-auto" src="./tsp-logo.png" alt="Timeless Saatphere" />
+                </div>
+                <p class="text-white/80 text-[18px] leading-[26px] mb-7">
+                    Timeless love • Cinematic stories • Forever frames.
+                </p>
+                <div class="flex items-center gap-4">
+                    <!-- Instagram (linked) -->
+                    <a href="https://www.instagram.com/timeless_saatphere/" target="_blank"
+                        rel="noopener noreferrer" aria-label="Instagram"
+                        class="w-[44px] h-[44px] rounded-full bg-white flex items-center justify-center hover:opacity-80 transition-opacity">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="black">
+                            <path d="M12 2c-2.72 0-3.06.01-4.13.06-1.07.05-1.8.22-2.44.47a4.92 4.92 0 0 0-1.78 1.16A4.92 4.92 0 0 0 2.49 5.47c-.25.64-.42 1.37-.47 2.44C1.97 8.98 1.96 9.32 1.96 12s.01 3.06.06 4.13c.05 1.07.22 1.8.47 2.44.26.66.6 1.22 1.16 1.78.56.56 1.12.9 1.78 1.16.64.25 1.37.42 2.44.47 1.07.05 1.41.06 4.13.06s3.06-.01 4.13-.06c1.07-.05 1.8-.22 2.44-.47a4.92 4.92 0 0 0 1.78-1.16 4.92 4.92 0 0 0 1.16-1.78c.25-.64.42-1.37.47-2.44.05-1.07.06-1.41.06-4.13s-.01-3.06-.06-4.13c-.05-1.07-.22-1.8-.47-2.44a4.92 4.92 0 0 0-1.16-1.78A4.92 4.92 0 0 0 18.9.53c-.64-.25-1.37-.42-2.44-.47C15.39.01 15.05 0 12.33 0h-.33Zm0 1.8c2.67 0 2.99.01 4.04.06.97.04 1.5.21 1.85.34.47.18.8.4 1.15.75.35.35.57.68.75 1.15.13.35.3.88.34 1.85.05 1.05.06 1.37.06 4.04s-.01 2.99-.06 4.04c-.04.97-.21 1.5-.34 1.85-.18.47-.4.8-.75 1.15-.35.35-.68.57-1.15.75-.35.13-.88.3-1.85.34-1.05.05-1.37.06-4.04.06s-2.99-.01-4.04-.06c-.97-.04-1.5-.21-1.85-.34a3.1 3.1 0 0 1-1.15-.75 3.1 3.1 0 0 1-.75-1.15c-.13-.35-.3-.88-.34-1.85C3.81 14.99 3.8 14.67 3.8 12s.01-2.99.06-4.04c.04-.97.21-1.5.34-1.85.18-.47.4-.8.75-1.15.35-.35.68-.57 1.15-.75.35-.13.88-.3 1.85-.34C9 1.81 9.33 1.8 12 1.8Zm0 3.07a5.13 5.13 0 1 0 0 10.26 5.13 5.13 0 0 0 0-10.26Zm0 8.46a3.33 3.33 0 1 1 0-6.66 3.33 3.33 0 0 1 0 6.66Zm6.54-8.66a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0Z" />
+                        </svg>
+                    </a>
+
+                    <!-- Facebook (no link) -->
+                    <span aria-label="Facebook"
+                        class="w-[44px] h-[44px] rounded-full bg-white flex items-center justify-center">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="black">
+                            <path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.9h2.54V9.84c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.23.2 2.23.2v2.45h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.44 2.9h-2.34V22c4.78-.79 8.44-4.94 8.44-9.94Z" />
+                        </svg>
+                    </span>
+
+                    <!-- X / Twitter (no link) -->
+                    <span aria-label="X"
+                        class="w-[44px] h-[44px] rounded-full bg-white flex items-center justify-center">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="black">
+                            <path d="M18.9 2H22l-7.2 8.23L23 22h-6.9l-5.4-7.06L4.3 22H1.2l7.7-8.8L1 2h7.1l4.9 6.46L18.9 2Zm-2.4 18h1.9L7.6 4H5.6l10.9 16Z" />
+                        </svg>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Contact -->
+            <div class="shrink-0 text-center lg:text-right">
+                <h4 class="font-primary text-white text-[36px] leading-[36px] mb-8">Contact</h4>
+                <div class="flex flex-col gap-4 text-white/90 text-[16px] leading-[24px]">
+                    <a href="tel:+918779299561" class="hover:text-white/60 transition-colors">+91 87792 99561</a>
+                    <a href="mailto:hello@brandname.com" class="hover:text-white/60 transition-colors">hello@brandname.com</a>
+                </div>
+            </div>
+        </div> <!-- closes the flex row (this was missing) -->
+
+        <!-- Subfooter -->
+        <p class="w-full text-center pt-20 text-white/70 text-[15px]">
+            © Copyright 2026 | Timeless Saatphere | All rights reserved.
+        </p>
+    </div>
+</footer>
+
+    <script>
+        gsap.registerPlugin(ScrollToPlugin);
+
+        const lenis = new Lenis({
+            duration: 1.15,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            smoothWheel: true,
+        });
+        gsap.ticker.add((time) => lenis.raf(time * 1000));
+        gsap.ticker.lagSmoothing(0);
+
+        /* NAVBAR */
+        const nav = document.getElementById("site-nav");
+        const navToggle = nav.querySelector(".nav-toggle");
+
+        function closeMobileMenu() {
+            nav.classList.remove("open");
+            navToggle.setAttribute("aria-expanded", "false");
+        }
+
+        lenis.on("scroll", ({ scroll, direction }) => {
+            if (scroll < 20) {
+                nav.classList.remove("nav-hidden");
+            } else if (direction === 1 && scroll > 120) {
+                nav.classList.add("nav-hidden");
+                closeMobileMenu();
+            } else if (direction === -1) {
+                nav.classList.remove("nav-hidden");
+            }
+        });
+
+        /* ANCHOR LINKS */
+        let isAutoScrolling = false;
+
+        function goToSection(hash, instant = false) {
+            const target = document.querySelector(hash);
+            if (!target) return;
+
+            const targetY = target.getBoundingClientRect().top + window.scrollY;
+            const goingUp = targetY < window.scrollY;
+            const offsetY = goingUp ? nav.offsetHeight : 0;
+
+            isAutoScrolling = true;
+            lenis.stop();
+
+            gsap.to(window, {
+                duration: instant ? 0 : 1.4,
+                scrollTo: { y: target, offsetY: offsetY, autoKill: false },
+                ease: "power3.inOut",
+                onUpdate: () => {
+                    const y = window.scrollY;
+                    if (y < 20) nav.classList.remove("nav-hidden");
+                    else if (goingUp) nav.classList.remove("nav-hidden");
+                    else if (y > 120) nav.classList.add("nav-hidden");
+                },
+                onComplete: () => {
+                    lenis.start();
+                    lenis.scrollTo(window.scrollY, { immediate: true, force: true });
+                    isAutoScrolling = false;
+                },
+            });
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach((link) => {
+            link.addEventListener("click", (e) => {
+                const hash = link.getAttribute("href");
+                if (!hash || hash === "#") return;
+                if (!document.querySelector(hash)) return;
+                e.preventDefault();
+                closeMobileMenu();
+                goToSection(hash);
+                history.pushState(null, "", hash);
+            });
+        });
+
+        window.addEventListener("load", () => {
+            if (location.hash && document.querySelector(location.hash)) {
+                setTimeout(() => goToSection(location.hash, true), 150);
+            }
+        });
+
+        /* FILMS + PHOTOGRAPHY SWIPERS */
+        const MIN_H = () => (window.innerWidth <= 768 ? 260 : 445);
+        const MAX_H = () => (window.innerWidth <= 768 ? 320 : 500);
+
+        const cineSwipers = [];
+
+        document.querySelectorAll(".cine-swiper").forEach((el, i) => {
+            const wrapper = el.querySelector(".swiper-wrapper");
+            const originals = Array.from(wrapper.children);
+            while (wrapper.children.length < 12) {
+                originals.forEach((c) => wrapper.appendChild(c.cloneNode(true)));
+            }
+
+            cineSwipers.push(
+                new Swiper(el, {
+                    loop: true,
+                    centeredSlides: true,
+                    slidesPerView: "auto",
+                    spaceBetween: 16,
+                    loopAdditionalSlides: 3,
+                    initialSlide: 0,
+                    observer: true,
+                    observeParents: true,
+                    speed: 700,
+                    grabCursor: true,
+                    watchSlidesProgress: true,
+                    autoplay: {
+                        delay: 3000 + i * 700,
+                        disableOnInteraction: false,
+                        pauseOnMouseEnter: true,
+                    },
+                }),
+            );
+        });
+
+        window.addEventListener("load", () => {
+            cineSwipers.forEach((sw) => {
+                sw.update();
+                sw.slideToLoop(0, 0, false);
+            });
+        });
+
+        /* TESTIMONIAL SWIPER */
+        new Swiper(".testimonial-swiper", {
+            slidesPerView: 1.15,
+            spaceBetween: 16,
+            observer: true,
+            observeParents: true,
+            pagination: {
+                el: ".testimonial-swiper .swiper-pagination",
+                clickable: true,
+            },
+            breakpoints: {
+                640: { slidesPerView: 2.2, spaceBetween: 20 },
+                1024: { slidesPerView: 4, spaceBetween: 24, allowTouchMove: false },
+            },
+        });
+
+        /* CLIP-PATH SYNC (desktop only) */
+        function tick() {
+            if (window.innerWidth <= 768) {
+                requestAnimationFrame(tick);
+                return;
+            }
+            const inset = MAX_H() - MIN_H();
+            cineSwipers.forEach((sw) => {
+                if (sw.destroyed || !sw.slides || !sw.slides.length) return;
+                sw.updateSlidesProgress(sw.getTranslate());
+                sw.slides.forEach((slide) => {
+                    const p = Math.min(Math.abs(slide.progress), 1);
+                    slide.style.clipPath =
+                        "inset(" + (inset * p).toFixed(2) + "px 0px 0px 0px)";
+                });
+            });
+            requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+    </script>
+</body>
+
+</html>
